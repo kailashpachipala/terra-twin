@@ -1,0 +1,14 @@
+fastapi==0.110.0
+uvicorn==0.28.0
+pydantic==2.6.4
+pydantic-settings==2.2.1
+sqlalchemy==2.0.28
+passlib[bcrypt]==1.7.4
+pyjwt==2.8.0
+python-multipart==0.0.9
+numpy==1.26.4
+pandas==2.2.1
+scikit-learn==1.4.1.post1
+xgboost==2.0.3
+lightgbm==4.3.0
+earthengine-api==0.1.393

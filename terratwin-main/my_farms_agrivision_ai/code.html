@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My Farms | AgriVision AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#00731e",
+                        "secondary": "#006e1c",
+                        "on-tertiary-fixed": "#261a00",
+                        "tertiary": "#6e5100",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#88d982",
+                        "surface-container": "#ccf8df",
+                        "surface-container-highest": "#c1ecd4",
+                        "on-surface-variant": "#40493d",
+                        "secondary-fixed": "#94f990",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#91f78e",
+                        "primary-fixed": "#a3f69c",
+                        "inverse-surface": "#0e3727",
+                        "surface-container-high": "#c6f2da",
+                        "outline-variant": "#bfcaba",
+                        "on-primary-fixed-variant": "#005312",
+                        "surface": "#e8fff0",
+                        "tertiary-fixed": "#ffdfa0",
+                        "on-tertiary-container": "#ffefd7",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#1b6d24",
+                        "on-surface": "#002114",
+                        "outline": "#707a6c",
+                        "surface-container-low": "#d1fee5",
+                        "primary-container": "#2e7d32",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed": "#002204",
+                        "surface-variant": "#c1ecd4",
+                        "tertiary-fixed-dim": "#f8bd2a",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#cffbe2",
+                        "on-background": "#002114",
+                        "surface-bright": "#e8fff0",
+                        "background": "#e8fff0",
+                        "on-primary-fixed": "#002204",
+                        "on-primary-container": "#cbffc2",
+                        "secondary-fixed-dim": "#78dc77",
+                        "on-secondary": "#ffffff",
+                        "primary": "#0d631b",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#88d982",
+                        "on-tertiary-fixed-variant": "#5c4300",
+                        "tertiary-container": "#8c6800",
+                        "on-secondary-fixed-variant": "#005313",
+                        "surface-dim": "#b8e4cc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "sm": "8px",
+                        "margin-desktop": "64px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "base": "8px",
+                        "xl": "32px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                        "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                        "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                        "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #F8FAF5; /* Nature-inspired light background */
+        }
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #E0E5DD;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface bg-background">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 flex flex-col pt-20 pb-lg bg-surface-container-low border-r border-outline-variant">
+<!-- Brand Identity Container (Mapped from JSON logic) -->
+<div class="px-lg mb-xl">
+<h1 class="font-title-lg text-title-lg font-bold text-primary">AgriVision AI</h1>
+<p class="font-label-lg text-label-lg text-on-surface-variant opacity-70">Precision Agriculture</p>
+</div>
+<nav class="flex-1 flex flex-col gap-xs px-sm custom-scroll overflow-y-auto">
+<!-- Active Tab Mapping: My Farms -->
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Overview
+            </a>
+<a class="flex items-center gap-md bg-secondary-container text-on-secondary-container rounded-lg px-md py-sm transition-transform active:translate-x-1 font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="agriculture" style="font-variation-settings: 'FILL' 1;">agriculture</span>
+                My Farms
+            </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="satellite_alt">satellite_alt</span>
+                Satellite Analysis
+            </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+                Reports
+            </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="px-md mt-auto space-y-sm">
+<button class="w-full bg-primary text-on-primary font-label-lg text-label-lg py-sm rounded-lg hover:brightness-110 transition-all shadow-sm">
+                Upgrade Plan
+            </button>
+<div class="pt-md border-t border-outline-variant space-y-xs">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                    Help Center
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all font-label-lg text-label-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                    Sign Out
+                </a>
+</div>
+</div>
+</aside>
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-surface shadow-sm">
+<div class="flex items-center gap-xl ml-64">
+<!-- Search Bar -->
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-high border-none rounded-full w-80 font-body-md text-body-md focus:ring-2 focus:ring-primary-container transition-all" placeholder="Search farms or regions..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant bg-surface-container">
+<img class="h-full w-full object-cover" data-alt="A professional headshot of a female agricultural manager with a warm, confident expression. She is outdoors in a sunlit wheat field, wearing a practical yet stylish utility shirt. The lighting is golden hour, casting a soft, nurturing glow that matches the technical serenity and organic reliability of the AgriVision AI brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwhiGk4IjHHy22O-8z_m0i0CvMf3RY9NH6TA6bTfAJHgCvqkif2yNrY8YBAGvw3TFryii6L6fFJCMrmx1i71X1uDy1M3PoDd8VrSM7O2SAs4_stB2GVj5myjwBI8taaZI0qoExsvujmtmWRSCqk1sUssTwp37mb1FI2_DtNWIAOjBv6q1z16mqiCyNoPuDHDxHEWErAF71hVtbMjWj1KtAj-88FBOmA-V_d7oAVeayN7oNzGPqIZ0_"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-16 min-h-screen">
+<div class="max-w-[1440px] mx-auto p-lg">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-xl">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">My Farms</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Monitoring 12,480 total hectares across 8 active zones.</p>
+</div>
+<button class="flex items-center gap-sm bg-primary text-on-primary px-lg py-md rounded-lg font-label-lg text-label-lg hover:shadow-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Add Farm
+                </button>
+</div>
+<!-- Dashboard Stats Bento Grid (Atmospheric Context) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-xl">
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-[0px_2px_8px_rgba(27,67,50,0.04)] hover:shadow-[0px_12px_24px_rgba(27,67,50,0.08)] transition-all">
+<p class="font-label-lg text-label-lg text-on-surface-variant mb-xs">Total Area</p>
+<p class="font-title-lg text-title-lg font-bold text-primary">12,480 <span class="text-label-sm font-normal text-on-surface-variant">ha</span></p>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-[0px_2px_8px_rgba(27,67,50,0.04)] hover:shadow-[0px_12px_24px_rgba(27,67,50,0.08)] transition-all">
+<p class="font-label-lg text-label-lg text-on-surface-variant mb-xs">Average Health</p>
+<div class="flex items-center gap-sm">
+<p class="font-title-lg text-title-lg font-bold text-on-secondary-container">92%</p>
+<span class="px-xs py-[2px] bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded">OPTIMAL</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-[0px_2px_8px_rgba(27,67,50,0.04)] hover:shadow-[0px_12px_24px_rgba(27,67,50,0.08)] transition-all">
+<p class="font-label-lg text-label-lg text-on-surface-variant mb-xs">Alerts Active</p>
+<p class="font-title-lg text-title-lg font-bold text-error">3 <span class="text-label-sm font-normal text-on-surface-variant">Critical</span></p>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-[0px_2px_8px_rgba(27,67,50,0.04)] hover:shadow-[0px_12px_24px_rgba(27,67,50,0.08)] transition-all">
+<p class="font-label-lg text-label-lg text-on-surface-variant mb-xs">Last Sync</p>
+<p class="font-title-lg text-title-lg font-bold text-tertiary">4m <span class="text-label-sm font-normal text-on-surface-variant">ago</span></p>
+</div>
+</div>
+<!-- Farms Table Container -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<!-- Table Filters -->
+<div class="px-lg py-md border-b border-outline-variant flex flex-wrap items-center justify-between gap-md">
+<div class="flex items-center gap-sm">
+<button class="flex items-center gap-xs px-md py-sm bg-surface-variant text-on-surface rounded-full font-label-lg text-label-lg">
+<span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
+                            All Farms
+                        </button>
+<button class="flex items-center gap-xs px-md py-sm hover:bg-surface-variant transition-colors rounded-full font-label-lg text-label-lg text-on-surface-variant">
+                            Corn
+                        </button>
+<button class="flex items-center gap-xs px-md py-sm hover:bg-surface-variant transition-colors rounded-full font-label-lg text-label-lg text-on-surface-variant">
+                            Soybean
+                        </button>
+<button class="flex items-center gap-xs px-md py-sm hover:bg-surface-variant transition-colors rounded-full font-label-lg text-label-lg text-on-surface-variant">
+                            Wheat
+                        </button>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sorted by: Newest First</span>
+<button class="p-sm text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="sort">sort</span>
+</button>
+</div>
+</div>
+<!-- Table Content -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-lg py-md font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Farm Name</th>
+<th class="px-lg py-md font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Location</th>
+<th class="px-lg py-md font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Area</th>
+<th class="px-lg py-md font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Crop Type</th>
+<th class="px-lg py-md font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Health Status</th>
+<th class="px-lg py-md font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wider">Last Analysis</th>
+<th class="px-lg py-md"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface transition-colors cursor-pointer group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="h-10 w-10 rounded-lg overflow-hidden bg-surface-container">
+<img class="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A lush aerial drone photograph of a geometric green farm field in the early morning. The rows of crops are perfectly aligned, showing healthy vibrant green hues. The lighting is crisp and clear, emphasizing the precision and high-tech monitoring capability of the AgriVision system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu75Hfv_a0JP-WX70nSWs-sxmqlijGe_egwX6KjLLTQKxMJrfGJTdr5MqlMnwj1Yq3GIgW_Grjqt8BuijEEN8xoq6szMsnu-WW9Z9jsA1zgr6LHjZ64QtFFUzl8r044M3-o8ujLKnd9uMOqjxoMfJ7uwqAfgZ7RoDrW8r-JPVIAXaMqo3JzsxFd6697O3Vlwl9NgEesYd12Fl3j-r4zjH7ny36g1w5P6MCn-BgJSS19mXeiX1pOxW1"/>
+</div>
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">Green Valley North</span>
+</div>
+</td>
+<td class="px-lg py-md font-body-md text-body-md text-on-surface-variant">Sacramento, CA</td>
+<td class="px-lg py-md font-body-md text-body-md text-on-surface">1,240 ha</td>
+<td class="px-lg py-md">
+<span class="px-md py-1 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-xs font-bold">CORN</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="h-2 w-2 rounded-full bg-secondary"></div>
+<span class="font-label-lg text-label-lg text-on-secondary-container">Optimal</span>
+</div>
+</td>
+<td class="px-lg py-md font-body-md text-body-md text-on-surface-variant">Oct 12, 2023 • 09:45 AM</td>
+<td class="px-lg py-md text-right">
+<button class="p-sm text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface transition-colors cursor-pointer group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="h-10 w-10 rounded-lg overflow-hidden bg-surface-container">
+<img class="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A detailed close-up aerial shot of a soybean plantation with some yellowing patches indicating moisture stress. The soil is visible between some rows, showing a warm earthy texture. The lighting is bright afternoon sun, creating high-contrast shadows that highlight the topographical details of the farm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEjxxt6WNuZ8x2YWqb8fYrGd_5HvkhJgG9H7FvS00Kf7CgCGJSW4AiYCc8OIsTmbZBotV92mrYQ3B2lgsDomxLw9ZBMvJSNolmwGSTMcqHPDvWYH50xLBvSP_xBC7bLCX0WgDX3UlJOPcronjnKNvm9HcrsuJYfMHFno5I7Y_0YGTzA5MJPh6ugdGlmfEezL_crDz8xII5r45Y9bSQFbsQKqyjeF33qjfra4ZfcvuHq_sus553I-5G"/>
+</div>
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">Riverside Plains</span>
+</div>
+</td>
+<td class="px-lg py-md font-body-md text-body-md text-on-surface-variant">Bakersfield, CA</td>
+<td class="px-lg py-md font-body-md text-body-md text-on-surface">850 ha</td>
+<td class="px-lg py-md">
+<span class="px-md py-1 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-full text-xs font-bold">SOYBEAN</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="h-2 w-2 rounded-full bg-tertiary-fixed-dim"></div>
+<span class="font-label-lg text-label-lg text-tertiary-container">Warning: Moisture</span>
+</div>
+</td>
+<td class="px-lg py-md font-body-md text-body-md text-on-surface-variant">Oct 11, 2023 • 02:20 PM</td>
+<td class="px-lg py-md text-right">
+<button class="p-sm text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface transition-colors cursor-pointer group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="h-10 w-10 rounded-lg overflow-hidden bg-surface-container">
+<img class="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="An expansive panoramic view of a wheat field under a dramatic stormy sky. Large circular irrigation patterns are visible from above. The color palette is a mix of golden wheat and deep charcoal clouds, conveying a sense of authoritative monitoring and enterprise-level farm management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSthehhnHQmiYcj1owNxmQevwY8LY6EfWZcrpkcYghmwERtGRlw8_xppNN_6O1rLwLAJsY3XWJc2e5Pwq0Uxfd_AQEClOXfiABTRWHMSxacGy94XacxIYTFAMGHS28TfnqbjZhcuCnmTPpKQujdqQ7QploRooCZDw1ggR9DlGdpjYtCVfnc4EINYQxAIk3rgyUb6WDEYtR9xWbasQNH4FIhey8DyB8ujuiNTRAfbYdxEj67dQv1zOC"/>
+</div>
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">East Ridge Estate</span>
+</div>
+</td>
+<td class="px-lg py-md font-body-md text-body-md text-on-surface-variant">Fresno, CA</td>
+<td class="px-lg py-md font-body-md text-body-md text-on-surface">3,100 ha</td>
+<td class="px-lg py-md">
+<span class="px-md py-1 bg-surface-container-highest text-on-surface-variant rounded-full text-xs font-bold">WHEAT</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="h-2 w-2 rounded-full bg-error"></div>
+<span class="font-label-lg text-label-lg text-error">Critical: Pest Detection</span>
+</div>
+</td>
+<td class="px-lg py-md font-body-md text-body-md text-on-surface-variant">Oct 12, 2023 • 08:15 AM</td>
+<td class="px-lg py-md text-right">
+<button class="p-sm text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface transition-colors cursor-pointer group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="h-10 w-10 rounded-lg overflow-hidden bg-surface-container">
+<img class="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A series of modern greenhouses seen from above, nestled in a valley. The sunlight reflects off the glass panels, creating a high-tech, technical serenity. The surrounding landscape is a gentle rolling green, suggesting sustainable and nurturing agriculture powered by artificial intelligence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhPg6tsA4dzS3McAG3MdZdaiS9zchuYlMeb58eXoDEXCsjMG03G_icTjHYGcMKrLdSdX9rgkH_d2ZWUftShcrEQSjJJ6Hvj_U7Dq0rXrajteQebC-XCKYKKyHmDmNFFgkHx_JSLNmz_gBxyoOtC8qQveN_Y9D9XCE22jl7oVlFKiHVmxmekyw7dayGQrdfsiQbBksoEzY0-_ghc8PIdlyejAc-JA-PMcyW4ASNv2JrcsGYyDDyfg69"/>
+</div>
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">Highland Vineyards</span>
+</div>
+</td>
+<td class="px-lg py-md font-body-md text-body-md text-on-surface-variant">Napa Valley, CA</td>
+<td class="px-lg py-md font-body-md text-body-md text-on-surface">420 ha</td>
+<td class="px-lg py-md">
+<span class="px-md py-1 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-xs font-bold">GRAPES</span>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="h-2 w-2 rounded-full bg-secondary"></div>
+<span class="font-label-lg text-label-lg text-on-secondary-container">Optimal</span>
+</div>
+</td>
+<td class="px-lg py-md font-body-md text-body-md text-on-surface-variant">Oct 10, 2023 • 11:30 AM</td>
+<td class="px-lg py-md text-right">
+<button class="p-sm text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination -->
+<div class="px-lg py-md border-t border-outline-variant flex items-center justify-between">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Showing 1-4 of 12 farms</p>
+<div class="flex items-center gap-xs">
+<button class="p-sm rounded hover:bg-surface-variant disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-on-primary font-label-lg text-label-lg">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-variant font-label-lg text-label-lg text-on-surface-variant">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-variant font-label-lg text-label-lg text-on-surface-variant">3</button>
+<button class="p-sm rounded hover:bg-surface-variant">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Asymmetric Data Visualization Insight -->
+<div class="mt-xl grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<div class="lg:col-span-2 bg-inverse-surface text-inverse-on-surface p-xl rounded-xl relative overflow-hidden group">
+<div class="relative z-10 flex flex-col justify-between h-full">
+<div>
+<span class="px-md py-1 bg-primary text-on-primary rounded-full text-[10px] font-bold uppercase tracking-widest mb-md inline-block">AI Insight</span>
+<h3 class="font-headline-lg text-headline-lg mb-sm">Satellite analysis detects soil nitrogen deficiency.</h3>
+<p class="font-body-lg text-body-lg opacity-80 max-w-lg mb-lg">Regions 4 and 12 in riverside plains are showing a 14% decline in vegetation index. Applying localized fertilization is recommended within the next 48 hours to prevent yield loss.</p>
+</div>
+<div class="flex gap-md">
+<button class="px-lg py-md bg-white text-primary rounded-lg font-label-lg text-label-lg font-bold hover:bg-opacity-90 transition-all">Generate Prescription</button>
+<button class="px-lg py-md border border-white/30 text-white rounded-lg font-label-lg text-label-lg hover:bg-white/10 transition-all">View Details</button>
+</div>
+</div>
+<!-- Subtle background graphic/shader placeholder -->
+<div class="absolute right-0 bottom-0 w-1/2 h-full opacity-20 pointer-events-none group-hover:opacity-30 transition-opacity">
+
+</div>
+</div>
+<div class="bg-surface-container-high p-lg rounded-xl border border-outline-variant flex flex-col justify-center">
+<div class="text-center">
+<span class="material-symbols-outlined text-primary text-[48px] mb-sm" data-icon="cloud_done">cloud_done</span>
+<h4 class="font-title-lg text-title-lg text-on-surface mb-xs">Weather Sync</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">All farms are currently synced with local meteorological stations.</p>
+<div class="flex items-center justify-center gap-lg">
+<div class="text-center">
+<p class="text-xs font-bold uppercase text-on-surface-variant mb-1">Humidity</p>
+<p class="text-lg font-bold text-primary">64%</p>
+</div>
+<div class="w-[1px] h-8 bg-outline-variant"></div>
+<div class="text-center">
+<p class="text-xs font-bold uppercase text-on-surface-variant mb-1">UV Index</p>
+<p class="text-lg font-bold text-primary">High (7)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple micro-interaction for the search bar
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-105');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-105');
+        });
+
+        // Simulating a hover effect for table rows with a subtle glow
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.boxShadow = 'inset 4px 0 0 #0d631b';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.boxShadow = 'none';
+            });
+        });
+    </script>
+</body></html>

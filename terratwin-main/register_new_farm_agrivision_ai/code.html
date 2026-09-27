@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Farm | AgriVision AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#00731e",
+                    "secondary": "#006e1c",
+                    "on-tertiary-fixed": "#261a00",
+                    "tertiary": "#6e5100",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#88d982",
+                    "surface-container": "#ccf8df",
+                    "surface-container-highest": "#c1ecd4",
+                    "on-surface-variant": "#40493d",
+                    "secondary-fixed": "#94f990",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#91f78e",
+                    "primary-fixed": "#a3f69c",
+                    "inverse-surface": "#0e3727",
+                    "surface-container-high": "#c6f2da",
+                    "outline-variant": "#bfcaba",
+                    "on-primary-fixed-variant": "#005312",
+                    "surface": "#e8fff0",
+                    "tertiary-fixed": "#ffdfa0",
+                    "on-tertiary-container": "#ffefd7",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#1b6d24",
+                    "on-surface": "#002114",
+                    "outline": "#707a6c",
+                    "surface-container-low": "#d1fee5",
+                    "primary-container": "#2e7d32",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#002204",
+                    "surface-variant": "#c1ecd4",
+                    "tertiary-fixed-dim": "#f8bd2a",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#cffbe2",
+                    "on-background": "#002114",
+                    "surface-bright": "#e8fff0",
+                    "background": "#e8fff0",
+                    "on-primary-fixed": "#002204",
+                    "on-primary-container": "#cbffc2",
+                    "secondary-fixed-dim": "#78dc77",
+                    "on-secondary": "#ffffff",
+                    "primary": "#0d631b",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#88d982",
+                    "on-tertiary-fixed-variant": "#5c4300",
+                    "tertiary-container": "#8c6800",
+                    "on-secondary-fixed-variant": "#005313",
+                    "surface-dim": "#b8e4cc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "sm": "8px",
+                    "margin-desktop": "64px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "base": "8px",
+                    "xl": "32px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .map-gradient-overlay {
+            background: linear-gradient(to right, rgba(232, 255, 240, 0.9) 0%, rgba(232, 255, 240, 0) 40%);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #bfcaba;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 flex flex-col pt-20 pb-lg bg-surface-container-low border-r border-outline-variant">
+<!-- Brand Identity Section (Top) -->
+<div class="px-lg mb-xl absolute top-6 left-0 w-full">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[20px]">agriculture</span>
+</div>
+<div>
+<h1 class="font-title-lg text-title-lg font-bold text-primary leading-tight">AgriVision AI</h1>
+<p class="text-[10px] uppercase tracking-widest text-outline">Precision Agriculture</p>
+</div>
+</div>
+</div>
+<!-- Main Navigation Links -->
+<nav class="flex-1 px-md space-y-sm mt-4">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-lg text-label-lg">Overview</span>
+</a>
+<!-- Active Tab: My Farms -->
+<a class="flex items-center gap-md bg-secondary-container text-on-secondary-container rounded-lg px-md py-sm active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">agriculture</span>
+<span class="font-label-lg text-label-lg">My Farms</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">satellite_alt</span>
+<span class="font-label-lg text-label-lg">Satellite Analysis</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-lg text-label-lg">Reports</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+<!-- Footer Actions -->
+<div class="px-md mt-auto pt-lg border-t border-outline-variant/30">
+<button class="w-full mb-md bg-primary text-on-primary py-sm px-md rounded-lg font-label-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-xs shadow-sm">
+<span class="material-symbols-outlined text-[18px]">upgrade</span>
+                Upgrade Plan
+            </button>
+<div class="space-y-xs">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-lg text-label-lg">Help Center</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:opacity-70 transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined text-error">logout</span>
+<span class="font-label-lg text-label-lg">Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Workspace Canvas -->
+<main class="ml-64 h-screen relative flex overflow-hidden">
+<!-- Interactive Map Background -->
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-surface-container-highest" data-alt="A high-resolution satellite view of lush green agricultural patchwork fields in rural Punjab under clear afternoon sunlight. The landscape displays intricate irrigation channels and diverse crop textures ranging from deep emerald to golden yellow. The visual style is crisp, technical, and high-contrast, mimicking a professional GIS software environment for precision farming." data-location="Punjab, India" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCBydcQxlzhuNS2bn8iZmzIxSUdhr0vyVCZaz1aRuDUz7BKrcz2Nc8cc0BCeKMp-MkokdZy-SFJa3kWXbZeup8fza8DRFz5G4zD8P6NZ14R5VLHs3AjtKV9jQT9yHglhvZ80_XRaLjtF5Q0tBTh-mMO5l535oHP89TWuBvPQST5fbK-IrCP7FJKNQpRubk91qohlZCsf1is-KVgaeXrZOVbVZ_3AlKc6k6CmNi4h7KKZhfJN0wmACXX')">
+</div>
+<!-- Interactive Layer Overlay (Simulated) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-60" viewbox="0 0 1000 1000">
+<path d="M400,300 L600,280 L650,450 L420,480 Z" fill="rgba(13, 99, 27, 0.2)" stroke="#0d631b" stroke-dasharray="4" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Left Gradient Mask for UI Readability -->
+<div class="absolute inset-y-0 left-0 w-1/3 map-gradient-overlay pointer-events-none z-10"></div>
+<!-- Floating Action Map Controls -->
+<div class="absolute bottom-lg right-lg z-30 flex flex-col gap-sm">
+<div class="flex flex-col gap-sm bg-white/80 backdrop-blur-md p-sm rounded-xl shadow-lg border border-outline-variant/30">
+<button class="w-12 h-12 flex items-center justify-center rounded-lg bg-primary text-on-primary hover:scale-105 active:scale-95 transition-all shadow-md group relative" title="Draw Farm Boundary">
+<span class="material-symbols-outlined">draw</span>
+<span class="absolute right-full mr-md px-sm py-xs bg-inverse-surface text-inverse-on-surface text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Draw Farm Boundary</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg bg-surface text-primary border border-primary/20 hover:bg-primary-container/10 active:scale-95 transition-all group relative" title="Upload GeoJSON">
+<span class="material-symbols-outlined">upload_file</span>
+<span class="absolute right-full mr-md px-sm py-xs bg-inverse-surface text-inverse-on-surface text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Upload GeoJSON</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg bg-surface text-primary border border-primary/20 hover:bg-primary-container/10 active:scale-95 transition-all group relative" title="Upload KML">
+<span class="material-symbols-outlined">map</span>
+<span class="absolute right-full mr-md px-sm py-xs bg-inverse-surface text-inverse-on-surface text-[10px] rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Upload KML</span>
+</button>
+</div>
+<div class="bg-white/80 backdrop-blur-md p-sm rounded-xl shadow-lg border border-outline-variant/30 flex flex-col gap-sm">
+<button class="w-12 h-12 flex items-center justify-center rounded-lg hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined">add</span></button>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined">remove</span></button>
+<button class="w-12 h-12 flex items-center justify-center rounded-lg hover:bg-surface-variant transition-colors"><span class="material-symbols-outlined">my_location</span></button>
+</div>
+</div>
+<!-- Breadcrumb & Header -->
+<div class="absolute top-lg left-lg z-20 flex flex-col gap-xs">
+<nav class="flex items-center gap-xs text-outline font-label-sm text-label-sm">
+<a class="hover:text-primary transition-colors" href="#">My Farms</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-medium">Add New Farm</span>
+</nav>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Define Farm Boundaries</h2>
+</div>
+<!-- Side Panel: Farm Details Card -->
+<div class="relative z-20 w-96 ml-lg my-auto h-[870px] bg-surface-container-lowest/90 backdrop-blur-xl rounded-2xl shadow-xl border border-white flex flex-col overflow-hidden">
+<div class="p-lg border-b border-outline-variant/20">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="font-title-lg text-title-lg text-primary font-bold">Farm Details</h3>
+<span class="px-sm py-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold rounded-full uppercase tracking-tighter">Draft</span>
+</div>
+<p class="text-on-surface-variant text-body-md">Enter basic information and verify dimensions on the map.</p>
+</div>
+<div class="flex-1 overflow-y-auto p-lg custom-scrollbar space-y-lg">
+<!-- Input Group: Name -->
+<div class="space-y-xs">
+<label class="font-label-lg text-label-lg text-on-surface-variant ml-xs">Farm Name</label>
+<div class="relative group">
+<input class="w-full bg-surface-container border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-lg px-md py-sm text-body-lg transition-all group-hover:bg-surface-container-high" placeholder="e.g. North Orchard Sector A" type="text"/>
+</div>
+</div>
+<!-- Input Group: Location -->
+<div class="space-y-xs">
+<label class="font-label-lg text-label-lg text-on-surface-variant ml-xs">Village / District</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-md text-outline">location_on</span>
+<input class="w-full bg-surface-container border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-lg pl-12 pr-md py-sm text-body-lg transition-all" placeholder="Start typing location..." type="text"/>
+</div>
+</div>
+<!-- Input Group: Crop -->
+<div class="space-y-xs">
+<label class="font-label-lg text-label-lg text-on-surface-variant ml-xs">Estimated Crop</label>
+<select class="w-full bg-surface-container border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-lg px-md py-sm text-body-lg transition-all appearance-none cursor-pointer">
+<option value="">Select Primary Crop</option>
+<option value="wheat">Wheat</option>
+<option value="rice">Rice (Paddy)</option>
+<option value="maize">Maize</option>
+<option value="cotton">Cotton</option>
+<option value="other">Other / Multi-crop</option>
+</select>
+</div>
+<!-- Dynamic Selection Data -->
+<div class="mt-xl grid grid-cols-2 gap-md p-md bg-surface-container rounded-xl border border-outline-variant/30">
+<div class="space-y-xs">
+<p class="text-[10px] text-outline font-bold uppercase tracking-widest">Total Area</p>
+<div class="flex items-baseline gap-xs">
+<span class="text-title-lg font-bold text-primary">12.45</span>
+<span class="text-label-sm text-on-surface-variant">Hectares</span>
+</div>
+</div>
+<div class="space-y-xs">
+<p class="text-[10px] text-outline font-bold uppercase tracking-widest">Coordinates</p>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px] text-tertiary">explore</span>
+<span class="text-body-md font-mono text-on-surface-variant">30.73, 76.77</span>
+</div>
+</div>
+</div>
+<!-- Validation Status -->
+<div class="flex items-start gap-sm p-md bg-secondary-container/20 rounded-lg border border-secondary/10">
+<span class="material-symbols-outlined text-secondary text-[20px]">verified</span>
+<p class="text-on-secondary-fixed-variant text-body-md italic leading-tight">
+                        Boundary successfully validated with 98% satellite alignment accuracy.
+                    </p>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="p-lg bg-surface-container-low/50 border-t border-outline-variant/20 flex gap-md">
+<button class="flex-1 px-md py-sm rounded-lg border border-primary text-primary font-label-lg hover:bg-primary/5 transition-colors">
+                    Cancel
+                </button>
+<button class="flex-2 px-xl py-sm rounded-lg bg-primary text-on-primary font-label-lg shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                    Save Farm
+                </button>
+</div>
+</div>
+</main>
+<!-- Overlay Interactions for Map -->
+<script>
+        // Simple micro-interactions for map tools
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Add a subtle ripple or sound logic here if needed
+                console.log('Action triggered:', btn.title || btn.innerText);
+            });
+        });
+
+        // Toggle focus state animation for side panel inputs
+        const inputs = document.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.classList.add('shadow-inner');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.classList.remove('shadow-inner');
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --color-primary: #2E7D32;
+  --color-primary-hover: #1B5E20;
+  --color-primary-light: #E8F5E9;
+  --color-secondary: #4CAF50;
+  --color-secondary-light: #E8F8EB;
+  --color-accent: #FBC02D;
+  --color-accent-light: #FFFDE7;
+  --color-background: #F8FAF5;
+  --color-card: #FFFFFF;
+  --color-text-main: #1B4332;
+  --color-text-secondary: #5F6B66;
+  
+  --color-surface-dim: #E0E8E3;
+  --color-surface-container: #F1F5F2;
+  --color-surface-container-high: #E2ECE5;
+  --color-surface-container-highest: #D3E0D6;
+  
+  --color-error: #D32F2F;
+  --color-error-light: #FFEBEE;
+  --color-warning: #F57C00;
+  --color-warning-light: #FFF3E0;
+  --color-success: #388E3C;
+  --color-success-light: #E8F5E9;
+  
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+:root {
+  --background: #F8FAF5;
+  --foreground: #1B4332;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism card utility */
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(46, 125, 50, 0.1);
+  box-shadow: 0 4px 20px -2px rgba(27, 67, 50, 0.04);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px -4px rgba(27, 67, 50, 0.08);
+  border-color: rgba(46, 125, 50, 0.2);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D3E0D6;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5F6B66;
+}
+
+/* Leaflet maps custom tooltip styling */
+.leaflet-container {
+  font-family: inherit;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  color: #1B4332;
+  border-radius: 12px;
+  border: 1px solid rgba(46, 125, 50, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.95);
+}

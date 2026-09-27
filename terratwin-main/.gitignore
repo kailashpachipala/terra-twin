@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+.next/
+out/
+dist/
+build/
+.firebase/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# System and Environment
+.env
+.env.local
+.env.production
+.system_generated/
+.gemini/
+.DS_Store
+Thumbs.db

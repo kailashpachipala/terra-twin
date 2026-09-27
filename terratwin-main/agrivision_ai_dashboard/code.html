@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriVision AI Dashboard</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#00731e",
+                    "secondary": "#006e1c",
+                    "on-tertiary-fixed": "#261a00",
+                    "tertiary": "#6e5100",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#88d982",
+                    "surface-container": "#ccf8df",
+                    "surface-container-highest": "#c1ecd4",
+                    "on-surface-variant": "#40493d",
+                    "secondary-fixed": "#94f990",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#91f78e",
+                    "primary-fixed": "#a3f69c",
+                    "inverse-surface": "#0e3727",
+                    "surface-container-high": "#c6f2da",
+                    "outline-variant": "#bfcaba",
+                    "on-primary-fixed-variant": "#005312",
+                    "surface": "#e8fff0",
+                    "tertiary-fixed": "#ffdfa0",
+                    "on-tertiary-container": "#ffefd7",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#1b6d24",
+                    "on-surface": "#002114",
+                    "outline": "#707a6c",
+                    "surface-container-low": "#d1fee5",
+                    "primary-container": "#2e7d32",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#002204",
+                    "surface-variant": "#c1ecd4",
+                    "tertiary-fixed-dim": "#f8bd2a",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#cffbe2",
+                    "on-background": "#002114",
+                    "surface-bright": "#e8fff0",
+                    "background": "#e8fff0",
+                    "on-primary-fixed": "#002204",
+                    "on-primary-container": "#cbffc2",
+                    "secondary-fixed-dim": "#78dc77",
+                    "on-secondary": "#ffffff",
+                    "primary": "#0d631b",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#88d982",
+                    "on-tertiary-fixed-variant": "#5c4300",
+                    "tertiary-container": "#8c6800",
+                    "on-secondary-fixed-variant": "#005313",
+                    "surface-dim": "#b8e4cc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "sm": "8px",
+                    "margin-desktop": "64px",
+                    "xs": "4px",
+                    "lg": "24px",
+                    "base": "8px",
+                    "xl": "32px",
+                    "gutter": "24px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(193, 236, 212, 0.5);
+        }
+        .metric-card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0px 12px 24px rgba(27, 67, 50, 0.08);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #bfcaba; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #707a6c; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 flex flex-col pt-20 pb-lg bg-surface-container-low border-r border-outline-variant hidden md:flex">
+<div class="px-md mb-xl">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">agriculture</span>
+</div>
+<div>
+<h1 class="font-title-lg text-title-lg font-bold text-primary">AgriVision AI</h1>
+<p class="text-label-sm font-label-sm text-outline">Precision Agriculture</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-sm space-y-1">
+<!-- Active Navigation -->
+<a class="flex items-center gap-md bg-secondary-container text-on-secondary-container rounded-lg px-md py-sm active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-lg text-label-lg">Overview</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all active:translate-x-1" href="#">
+<span class="material-symbols-outlined">agriculture</span>
+<span class="font-label-lg text-label-lg">My Farms</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all active:translate-x-1" href="#">
+<span class="material-symbols-outlined">satellite_alt</span>
+<span class="font-label-lg text-label-lg">Satellite Analysis</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all active:translate-x-1" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-lg text-label-lg">Reports</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all active:translate-x-1" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-lg text-label-lg">Settings</span>
+</a>
+</nav>
+<div class="px-md mt-auto pt-lg space-y-1">
+<button class="w-full mb-md bg-primary text-on-primary font-label-lg text-label-lg py-sm rounded-full shadow-sm hover:opacity-90 transition-opacity">
+                Upgrade Plan
+            </button>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-lg text-label-lg">Help Center</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant transition-all" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-lg text-label-lg">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-surface shadow-sm md:left-64 md:w-[calc(100%-16rem)]">
+<div class="flex items-center gap-md flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full pl-xl pr-md py-xs text-body-md font-body-md focus:ring-2 focus:ring-primary outline-none" placeholder="Search farms, crops, or data..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md ml-lg">
+<div class="hidden lg:flex items-center gap-lg mr-lg">
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary pb-1" href="#">Dashboard</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Analytics</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Reports</a>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-sm text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant mx-xs"></div>
+<button class="bg-primary text-on-primary px-md py-xs rounded-full font-label-lg text-label-lg hover:opacity-90 transition-opacity active:scale-95">
+                        Add Farm
+                    </button>
+<img class="h-10 w-10 rounded-full border-2 border-surface-container-highest object-cover ml-sm cursor-pointer" data-alt="Professional corporate headshot of a female agricultural scientist in her late 30s, smiling warmly, wearing a clean lab coat. The lighting is bright and natural, reflecting a high-tech agricultural research facility background. The image has a fresh, light-mode aesthetic with soft greens and whites, perfectly matching the AgriVision AI brand persona of technical serenity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVDKeLBc1AqzvJufGuPW-u3Vx9Ie04X-sAqrL3VDqJTYe1kjphoh7ePpFbpn1hygSLqYctfOIsN8ZlNTaxua1YOycVlT5P9-sGt2lL_dTZPv886J3ZxlRUoHjai-4nzHeSeFHCKzQfpkAuHE9FY4c5BJ8ruIElZj35Tn4S8SLdSJEkZ7tlTAWBIaY8IC8enPBRI4PaNZpzrQifzzpwU9Wza4I8Q_1LlgWrORidQdzZ6UDQaS7yBsoz"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="pt-24 px-lg pb-xl max-w-[1440px] mx-auto w-full">
+<!-- Welcome Header -->
+<div class="mb-lg flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Farm Overview</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Central Valley Plot 42 • San Joaquin, CA</p>
+</div>
+<div class="flex gap-sm">
+<div class="flex items-center gap-xs px-md py-sm bg-surface-container-high rounded-lg">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="text-label-lg font-label-lg">August 24, 2024</span>
+</div>
+<div class="flex items-center gap-xs px-md py-sm bg-tertiary-fixed rounded-lg text-on-tertiary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="text-label-lg font-label-lg">2 Alerts Active</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid Metrics -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md mb-xl">
+<!-- Plant Health -->
+<div class="glass-card metric-card-hover transition-all duration-300 p-md rounded-xl flex flex-col justify-between h-32">
+<div class="flex justify-between items-start">
+<span class="text-label-lg font-label-lg text-on-surface-variant">Plant Health</span>
+<span class="material-symbols-outlined text-primary">eco</span>
+</div>
+<div>
+<div class="text-headline-lg font-headline-lg">94%</div>
+<div class="flex items-center text-on-secondary-container text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>+2.4% vs last week</span>
+</div>
+</div>
+</div>
+<!-- Soil Health -->
+<div class="glass-card metric-card-hover transition-all duration-300 p-md rounded-xl flex flex-col justify-between h-32">
+<div class="flex justify-between items-start">
+<span class="text-label-lg font-label-lg text-on-surface-variant">Soil Nutrients</span>
+<span class="material-symbols-outlined text-tertiary">heap_snapshot_thumbnail</span>
+</div>
+<div>
+<div class="text-headline-lg font-headline-lg text-on-surface">Optimal</div>
+<div class="text-label-sm font-label-sm text-outline">N: 42 | P: 18 | K: 24</div>
+</div>
+</div>
+<!-- Moisture Stress -->
+<div class="glass-card metric-card-hover transition-all duration-300 p-md rounded-xl flex flex-col justify-between h-32">
+<div class="flex justify-between items-start">
+<span class="text-label-lg font-label-lg text-on-surface-variant">Moisture Stress</span>
+<span class="material-symbols-outlined text-error">water_drop</span>
+</div>
+<div>
+<div class="text-headline-lg font-headline-lg text-error">12%</div>
+<div class="text-label-sm font-label-sm text-error">Moderate in SE Sector</div>
+</div>
+</div>
+<!-- Yield Prediction -->
+<div class="glass-card metric-card-hover transition-all duration-300 p-md rounded-xl flex flex-col justify-between h-32">
+<div class="flex justify-between items-start">
+<span class="text-label-lg font-label-lg text-on-surface-variant">Yield Projection</span>
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<div>
+<div class="text-headline-lg font-headline-lg">2.8 <span class="text-body-md">t/ac</span></div>
+<div class="text-label-sm font-label-sm text-on-secondary-container">Confidence: 92%</div>
+</div>
+</div>
+</div>
+<!-- Asymmetric Map & Analysis Layout -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-lg mb-xl">
+<!-- Large Satellite Map -->
+<div class="xl:col-span-2 glass-card rounded-xl overflow-hidden relative min-h-[500px]">
+<div class="absolute inset-0 bg-surface-container-high" data-alt="A high-resolution satellite top-down view of expansive agricultural fields featuring a mix of vibrant green healthy crops and drier golden patches. The fields are segmented by clean, straight dirt roads in a grid pattern. One section shows a false-color NDVI heat map overlay with intense greens and yellows, representing technical precision and advanced monitoring. The lighting is bright midday sun, casting soft shadows, creating a professional and data-driven atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDThU2aqHaM3fSE157H55WTNp8FSi7qgCmsGLVJHLYxCTzQlEbpVUgGH3ZYe3OG41pOpb7AcE2rRD-ZQdOh8fpUk7LO57NmAOIzn9Bxd3u3IIjmZf5WoNiWIlGqJsgg6dRIzt7mq5hUXw5ZQyd3PsoUt3Y1Iqhxsqzi1KpySwywlGU46pdGBBRH9zZ3D0_WOiIerLq_RajDj4MGRwbflDJXS-2uoiCtX9ZX-1BYArnFoBnBsBzSW_Nq')">
+<!-- Layer Toggles -->
+<div class="absolute top-md left-md flex flex-col gap-sm">
+<div class="flex flex-col bg-surface/90 backdrop-blur-md rounded-lg p-xs shadow-sm border border-outline-variant">
+<button class="p-sm rounded bg-primary-container text-on-primary-container mb-xs" title="RGB View">
+<span class="material-symbols-outlined">layers</span>
+</button>
+<button class="p-sm rounded hover:bg-surface-variant text-on-surface-variant mb-xs" title="NDVI Index">
+<span class="material-symbols-outlined">monitoring</span>
+</button>
+<button class="p-sm rounded hover:bg-surface-variant text-on-surface-variant mb-xs" title="NDWI Water">
+<span class="material-symbols-outlined">opacity</span>
+</button>
+<button class="p-sm rounded hover:bg-surface-variant text-on-surface-variant" title="Moisture Map">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+</div>
+</div>
+<!-- Map Legend -->
+<div class="absolute bottom-md left-md bg-surface/90 backdrop-blur-md rounded-lg p-md shadow-sm border border-outline-variant">
+<h4 class="text-label-sm font-label-sm text-on-surface mb-xs">NDVI Vegetation Scale</h4>
+<div class="w-48 h-2 bg-gradient-to-r from-tertiary to-primary rounded-full mb-xs"></div>
+<div class="flex justify-between text-[10px] text-outline uppercase font-bold">
+<span>Low (0.0)</span>
+<span>High (1.0)</span>
+</div>
+</div>
+<!-- Location Pin Indicator -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+<div class="w-4 h-4 bg-primary rounded-full border-2 border-white shadow-lg animate-pulse"></div>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-sm hidden group-hover:block bg-surface p-sm rounded shadow-lg border border-outline-variant whitespace-nowrap">
+<div class="text-label-lg font-bold">Zone A-12</div>
+<div class="text-label-sm text-error">Critical Stress Detected</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Analysis Column -->
+<div class="flex flex-col gap-lg">
+<!-- Weather Summary Card -->
+<div class="glass-card rounded-xl p-lg flex-1">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-title-lg text-title-lg text-on-surface">Local Weather</h3>
+<span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-variation-settings: 'FILL' 1;">sunny</span>
+</div>
+<div class="flex items-center gap-md mb-lg">
+<div class="text-[48px] font-bold">84°</div>
+<div>
+<div class="font-label-lg">Clear Skies</div>
+<div class="text-label-sm text-outline">San Joaquin Valley</div>
+</div>
+</div>
+<div class="space-y-md">
+<div class="flex justify-between items-center text-body-md">
+<span class="text-on-surface-variant">Humidity</span>
+<span class="font-bold">24%</span>
+</div>
+<div class="flex justify-between items-center text-body-md">
+<span class="text-on-surface-variant">Wind Speed</span>
+<span class="font-bold">6 mph NW</span>
+</div>
+<div class="flex justify-between items-center text-body-md">
+<span class="text-on-surface-variant">Rain Chance</span>
+<span class="font-bold text-error">0%</span>
+</div>
+</div>
+</div>
+<!-- Irrigation Status Card -->
+<div class="glass-card rounded-xl p-lg flex-1 bg-gradient-to-br from-surface to-surface-container-low">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-title-lg text-title-lg text-on-surface">Irrigation</h3>
+<div class="w-3 h-3 bg-primary rounded-full animate-ping"></div>
+</div>
+<div class="mb-md">
+<div class="text-label-sm font-label-sm text-outline uppercase tracking-wider mb-xs">Current State</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">valve</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Active</span>
+</div>
+</div>
+<div class="p-md bg-white/50 rounded-lg border border-outline-variant">
+<div class="flex justify-between text-body-md mb-sm">
+<span>Cycle Remaining</span>
+<span class="font-bold">02:45:00</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-2/3"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Analytics & Charts Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg mb-xl">
+<!-- NDVI Trend (Line Simulation) -->
+<div class="glass-card rounded-xl p-md h-64 flex flex-col">
+<h3 class="font-label-lg text-label-lg mb-md text-on-surface-variant">NDVI Trend (30d)</h3>
+<div class="flex-1 flex items-end gap-1 px-sm">
+<div class="bg-primary/20 hover:bg-primary transition-all w-full h-[40%] rounded-t-sm"></div>
+<div class="bg-primary/20 hover:bg-primary transition-all w-full h-[45%] rounded-t-sm"></div>
+<div class="bg-primary/20 hover:bg-primary transition-all w-full h-[55%] rounded-t-sm"></div>
+<div class="bg-primary/20 hover:bg-primary transition-all w-full h-[60%] rounded-t-sm"></div>
+<div class="bg-primary/20 hover:bg-primary transition-all w-full h-[80%] rounded-t-sm"></div>
+<div class="bg-primary/20 hover:bg-primary transition-all w-full h-[75%] rounded-t-sm"></div>
+<div class="bg-primary/20 hover:bg-primary transition-all w-full h-[85%] rounded-t-sm"></div>
+<div class="bg-primary/20 hover:bg-primary transition-all w-full h-[90%] rounded-t-sm"></div>
+</div>
+<div class="flex justify-between mt-sm text-[10px] text-outline px-sm">
+<span>1 AUG</span>
+<span>15 AUG</span>
+<span>30 AUG</span>
+</div>
+</div>
+<!-- Rainfall (Bar Simulation) -->
+<div class="glass-card rounded-xl p-md h-64 flex flex-col">
+<h3 class="font-label-lg text-label-lg mb-md text-on-surface-variant">Rainfall (mm)</h3>
+<div class="flex-1 flex items-end gap-2 px-sm">
+<div class="bg-secondary/40 w-full h-[20%] rounded-t-sm"></div>
+<div class="bg-secondary/40 w-full h-[10%] rounded-t-sm"></div>
+<div class="bg-secondary/40 w-full h-[60%] rounded-t-sm"></div>
+<div class="bg-secondary/40 w-full h-[15%] rounded-t-sm"></div>
+<div class="bg-secondary/40 w-full h-[5%] rounded-t-sm"></div>
+<div class="bg-secondary/40 w-full h-[30%] rounded-t-sm"></div>
+</div>
+<div class="flex justify-between mt-sm text-[10px] text-outline px-sm">
+<span>MAR</span>
+<span>APR</span>
+<span>MAY</span>
+<span>JUN</span>
+<span>JUL</span>
+<span>AUG</span>
+</div>
+</div>
+<!-- Crop Distribution (Pie Simulation) -->
+<div class="glass-card rounded-xl p-md h-64 flex flex-col items-center justify-center">
+<h3 class="w-full font-label-lg text-label-lg mb-md text-on-surface-variant">Crop Distribution</h3>
+<div class="relative w-32 h-32 rounded-full border-[16px] border-primary" style="border-right-color: #94f990; border-bottom-color: #ffdfa0;">
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-headline-lg-mobile font-bold">4</span>
+<span class="text-[10px] text-outline uppercase">Types</span>
+</div>
+</div>
+<div class="mt-md grid grid-cols-2 gap-x-md gap-y-1">
+<div class="flex items-center gap-xs text-[10px]">
+<div class="w-2 h-2 bg-primary rounded-full"></div> Corn
+                        </div>
+<div class="flex items-center gap-xs text-[10px]">
+<div class="w-2 h-2 bg-secondary-fixed rounded-full"></div> Soy
+                        </div>
+<div class="flex items-center gap-xs text-[10px]">
+<div class="w-2 h-2 bg-tertiary-fixed rounded-full"></div> Wheat
+                        </div>
+<div class="flex items-center gap-xs text-[10px]">
+<div class="w-2 h-2 bg-outline-variant rounded-full"></div> Other
+                        </div>
+</div>
+</div>
+<!-- Moisture Changes (Area Simulation) -->
+<div class="glass-card rounded-xl p-md h-64 flex flex-col">
+<h3 class="font-label-lg text-label-lg mb-md text-on-surface-variant">Moisture Index</h3>
+<div class="flex-1 relative overflow-hidden bg-surface-container-low rounded-lg">
+<svg class="absolute bottom-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,80 Q25,20 50,70 T100,40 L100,100 L0,100 Z" fill="rgba(0, 110, 28, 0.1)"></path>
+<path d="M0,80 Q25,20 50,70 T100,40" fill="none" stroke="#006e1c" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex justify-between mt-sm text-[10px] text-outline">
+<span>00:00</span>
+<span>12:00</span>
+<span>23:59</span>
+</div>
+</div>
+</div>
+<!-- Recent Analysis Table -->
+<section class="glass-card rounded-xl overflow-hidden">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-title-lg text-title-lg text-on-surface">Recent Analysis</h3>
+<button class="text-primary font-label-lg text-label-lg hover:underline transition-all">View All Reports</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-low/50 text-outline text-label-sm uppercase tracking-wider">
+<th class="px-lg py-md font-medium">Farm Name</th>
+<th class="px-lg py-md font-medium">Crop Health</th>
+<th class="px-lg py-md font-medium">Stress Level</th>
+<th class="px-lg py-md font-medium">Yield Est.</th>
+<th class="px-lg py-md font-medium">Last Updated</th>
+<th class="px-lg py-md font-medium"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-variant/30 transition-colors cursor-pointer group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-primary-container/20 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">location_on</span>
+</div>
+<div>
+<div class="font-label-lg text-on-surface">Central Plot A</div>
+<div class="text-body-md text-outline">Corn • 120 Acres</div>
+</div>
+</div>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="w-24 bg-surface-container-highest h-1.5 rounded-full">
+<div class="bg-primary h-full w-[92%] rounded-full"></div>
+</div>
+<span class="text-body-md font-bold">92%</span>
+</div>
+</td>
+<td class="px-lg py-md">
+<span class="px-md py-xs bg-surface-container-high text-on-secondary-container text-label-sm rounded-full">Low</span>
+</td>
+<td class="px-lg py-md font-body-md text-on-surface">2.4 t/ac</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">2h ago</td>
+<td class="px-lg py-md text-right">
+<button class="p-sm rounded-full hover:bg-primary-container/10 text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/30 transition-colors cursor-pointer group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-tertiary-container/20 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">location_on</span>
+</div>
+<div>
+<div class="font-label-lg text-on-surface">North Ridge B</div>
+<div class="text-body-md text-outline">Soybeans • 85 Acres</div>
+</div>
+</div>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="w-24 bg-surface-container-highest h-1.5 rounded-full">
+<div class="bg-tertiary h-full w-[78%] rounded-full"></div>
+</div>
+<span class="text-body-md font-bold">78%</span>
+</div>
+</td>
+<td class="px-lg py-md">
+<span class="px-md py-xs bg-tertiary-fixed text-on-tertiary-fixed text-label-sm rounded-full">Moderate</span>
+</td>
+<td class="px-lg py-md font-body-md text-on-surface">1.8 t/ac</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">5h ago</td>
+<td class="px-lg py-md text-right">
+<button class="p-sm rounded-full hover:bg-primary-container/10 text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/30 transition-colors cursor-pointer group">
+<td class="px-lg py-md">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-error-container/20 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-error">location_on</span>
+</div>
+<div>
+<div class="font-label-lg text-on-surface">East Valley S</div>
+<div class="text-body-md text-outline">Wheat • 210 Acres</div>
+</div>
+</div>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="w-24 bg-surface-container-highest h-1.5 rounded-full">
+<div class="bg-error h-full w-[54%] rounded-full"></div>
+</div>
+<span class="text-body-md font-bold">54%</span>
+</div>
+</td>
+<td class="px-lg py-md">
+<span class="px-md py-xs bg-error-container text-on-error-container text-label-sm rounded-full">Critical</span>
+</td>
+<td class="px-lg py-md font-body-md text-on-surface">1.1 t/ac</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">Yesterday</td>
+<td class="px-lg py-md text-right">
+<button class="p-sm rounded-full hover:bg-primary-container/10 text-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+<!-- Mobile Bottom Navigation (Platform Pivot) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 bg-surface-container-low flex justify-around items-center border-t border-outline-variant z-50">
+<button class="flex flex-col items-center gap-xs text-primary">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold">Overview</span>
+</button>
+<button class="flex flex-col items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined">satellite_alt</span>
+<span class="text-[10px]">Analysis</span>
+</button>
+<div class="mb-8 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-on-primary shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</div>
+<button class="flex flex-col items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined">assessment</span>
+<span class="text-[10px]">Reports</span>
+</button>
+<button class="flex flex-col items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px]">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple Micro-interactions for Dashboard
+        document.querySelectorAll('.metric-card-hover').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.borderColor = 'rgba(13, 99, 27, 0.4)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderColor = 'rgba(193, 236, 212, 0.5)';
+            });
+        });
+
+        // Layer Toggle Active States
+        const layerButtons = document.querySelectorAll('[title]');
+        layerButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                layerButtons.forEach(b => {
+                    b.classList.remove('bg-primary-container', 'text-on-primary-container');
+                    b.classList.add('hover:bg-surface-variant', 'text-on-surface-variant');
+                });
+                btn.classList.add('bg-primary-container', 'text-on-primary-container');
+                btn.classList.remove('hover:bg-surface-variant', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+  </style>
+</head>
+<body>
+<!-- STITCH_THREEJS_START:ANIMATION_9 class="fixed inset-0 w-full h-full bg-transparent" -->
+<div class="fixed inset-0 w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_9" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_9');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const container = document.getElementById('threejs-container') || document.body;
+const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || window.innerHeight;
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(width, height);
+renderer.setClearColor(0x000000, 0);
+container.appendChild(renderer.domElement);
+
+// Earth
+const earthGroup = new THREE.Group();
+const earthGeom = new THREE.SphereGeometry(2, 64, 64);
+const earthMat = new THREE.MeshPhongMaterial({ 
+  color: 0x2e7d32, 
+  shininess: 15,
+  transparent: true,
+  opacity: 0.95
+});
+const earth = new THREE.Mesh(earthGeom, earthMat);
+earthGroup.add(earth);
+
+const gridGeom = new THREE.SphereGeometry(2.05, 32, 32);
+const gridMat = new THREE.MeshBasicMaterial({ 
+  color: 0x4caf50, 
+  wireframe: true, 
+  transparent: true, 
+  opacity: 0.15 
+});
+const grid = new THREE.Mesh(gridGeom, gridMat);
+earthGroup.add(grid);
+scene.add(earthGroup);
+
+// Satellite
+const satGroup = new THREE.Group();
+const satBody = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.2, 0.2), new THREE.MeshPhongMaterial({ color: 0x5f6b66 }));
+satGroup.add(satBody);
+
+const panel1 = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.15, 0.02), new THREE.MeshPhongMaterial({ color: 0xfbc02d }));
+panel1.position.x = 0.45;
+satGroup.add(panel1);
+
+const panel2 = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.15, 0.02), new THREE.MeshPhongMaterial({ color: 0xfbc02d }));
+panel2.position.x = -0.45;
+satGroup.add(panel2);
+scene.add(satGroup);
+
+// Orbit
+const orbitGeom = new THREE.RingGeometry(4.48, 4.52, 128);
+const orbitMat = new THREE.MeshBasicMaterial({ color: 0xfbc02d, side: THREE.DoubleSide, transparent: true, opacity: 0.2 });
+const orbit = new THREE.Mesh(orbitGeom, orbitMat);
+orbit.rotation.x = Math.PI / 2.2;
+scene.add(orbit);
+
+// Lighting
+scene.add(new THREE.AmbientLight(0xffffff, 0.7));
+const sun = new THREE.DirectionalLight(0xffffff, 1);
+sun.position.set(5, 5, 5);
+scene.add(sun);
+
+camera.position.z = 8;
+
+let time = 0;
+function animate() {
+  requestAnimationFrame(animate);
+  time += 0.005;
+  
+  earthGroup.rotation.y += 0.002;
+  
+  satGroup.position.x = Math.cos(time) * 4.5;
+  satGroup.position.z = Math.sin(time) * 4.5;
+  satGroup.position.y = Math.sin(time * 0.5) * 1.5;
+  satGroup.lookAt(earth.position);
+  
+  renderer.render(scene, camera);
+}
+
+window.addEventListener('resize', () => {
+  const w = container.clientWidth || window.innerWidth;
+  const h = container.clientHeight || window.innerHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+});
+
+animate();
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_9 -->
+</body>
+</html>

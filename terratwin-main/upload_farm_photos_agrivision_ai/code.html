@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Register New Farm | AgriVision AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .map-gradient-overlay {
+            background: linear-gradient(to right, rgba(232, 255, 240, 1) 0%, rgba(232, 255, 240, 0) 100%);
+        }
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#ffffff",
+                    "secondary-fixed": "#94f990",
+                    "secondary-container": "#91f78e",
+                    "on-surface": "#002114",
+                    "surface-dim": "#b8e4cc",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#a3f69c",
+                    "surface-tint": "#1b6d24",
+                    "on-surface-variant": "#40493d",
+                    "surface": "#e8fff0",
+                    "surface-container-highest": "#c1ecd4",
+                    "surface-container-low": "#d1fee5",
+                    "on-tertiary-container": "#ffefd7",
+                    "primary-fixed-dim": "#88d982",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#f8bd2a",
+                    "surface-container-high": "#c6f2da",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#002204",
+                    "surface-container": "#ccf8df",
+                    "on-primary-container": "#cbffc2",
+                    "primary-container": "#2e7d32",
+                    "secondary-fixed-dim": "#78dc77",
+                    "secondary": "#006e1c",
+                    "inverse-primary": "#88d982",
+                    "on-tertiary-fixed-variant": "#5c4300",
+                    "on-secondary-container": "#00731e",
+                    "inverse-on-surface": "#cffbe2",
+                    "on-secondary-fixed-variant": "#005313",
+                    "on-background": "#002114",
+                    "surface-variant": "#c1ecd4",
+                    "on-tertiary-fixed": "#261a00",
+                    "primary": "#0d631b",
+                    "outline-variant": "#bfcaba",
+                    "tertiary-fixed": "#ffdfa0",
+                    "on-error-container": "#93000a",
+                    "background": "#e8fff0",
+                    "tertiary-container": "#8c6800",
+                    "on-secondary-fixed": "#002204",
+                    "error": "#ba1a1a",
+                    "outline": "#707a6c",
+                    "inverse-surface": "#0e3727",
+                    "surface-bright": "#e8fff0",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#005312",
+                    "tertiary": "#6e5100",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "sm": "8px",
+                    "gutter": "24px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "margin-mobile": "16px",
+                    "base": "8px",
+                    "lg": "24px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.25px", "fontWeight": "400"}],
+                    "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.1px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-sm": ["11px", {"lineHeight": "16px", "letterSpacing": "0.5px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.5px", "fontWeight": "400"}],
+                    "title-lg": ["22px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "display-lg": ["57px", {"lineHeight": "64px", "letterSpacing": "-0.25px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-surface shadow-sm">
+<div class="flex items-center gap-md">
+<h1 class="font-headline-lg text-headline-lg font-extrabold text-primary">AgriVision AI</h1>
+<nav class="hidden md:flex ml-xl gap-lg">
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="font-body-md text-primary border-b-2 border-primary pb-1" href="#">My Farms</a>
+<a class="font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Analytics</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container rounded-full p-2 transition-all">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container rounded-full p-2 transition-all">settings</button>
+<div class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female agronomist in an office setting, soft natural lighting, high-end corporate photography style with a clean minimalist background. The color palette features soft greens and warm neutrals to match the brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqnYkmEXe_IarQbj4Bj8sxuZ5csHmHE2BXCm9oq3oFhSdietwcAyWxZWnDV00-xnZK6duaQ2rJLzpgwfpU04ICoX4T9S_pvKwJGTl-j5Q957mI16hXuZwuIiQ3Ssj5wwIzaH3g1XVDMjP9kNuj-37pLapNXS1Gb14VaD2VPY8HkGhyQv9YaNqMvnFlbMhThf8GxO54kTc3-RHigGXLBqO1TyttrQnO5L6p8CaAbyEtVOhXD4t1xpEC"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 flex flex-col pt-20 pb-lg bg-surface-container-low border-r border-outline-variant hidden lg:flex">
+<div class="px-md mb-lg">
+<div class="flex items-center gap-sm mb-xs">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">agriculture</span>
+</div>
+<div class="flex flex-col">
+<span class="font-title-lg text-title-lg font-bold text-primary leading-tight">AgriVision AI</span>
+<span class="text-xs text-outline font-medium tracking-wide">PRECISION AGRICULTURE</span>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-sm space-y-1">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant rounded-lg transition-all active:translate-x-1" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-lg">Overview</span>
+</a>
+<a class="flex items-center gap-md bg-secondary-container text-on-secondary-container rounded-lg px-md py-sm transition-all active:translate-x-1" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">agriculture</span>
+<span class="font-label-lg">My Farms</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant rounded-lg transition-all active:translate-x-1" href="#">
+<span class="material-symbols-outlined">satellite_alt</span>
+<span class="font-label-lg">Satellite Analysis</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant rounded-lg transition-all active:translate-x-1" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="font-label-lg">Reports</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant rounded-lg transition-all active:translate-x-1" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-lg">Settings</span>
+</a>
+</nav>
+<div class="px-md mt-auto pt-lg space-y-4">
+<div class="bg-primary p-md rounded-xl text-on-primary shadow-sm">
+<p class="text-xs font-medium mb-xs opacity-90">Enterprise Plan</p>
+<p class="font-bold mb-md">Upgrade for AI Insights</p>
+<button class="w-full bg-white text-primary py-sm rounded-lg font-bold text-sm transition-transform active:scale-95">Upgrade Plan</button>
+</div>
+<div class="space-y-1">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-lg">Help Center</span>
+</a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm hover:bg-surface-variant rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-error">logout</span>
+<span class="font-label-lg">Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:pl-64 pt-16 h-screen flex flex-col md:flex-row overflow-hidden">
+<!-- Left Section: Multi-Step Form -->
+<section class="w-full md:w-[450px] lg:w-[500px] xl:w-[600px] bg-white h-full overflow-y-auto z-10 shadow-2xl relative">
+<div class="p-lg lg:p-xl">
+<header class="mb-xl">
+<div class="flex items-center gap-sm text-primary mb-sm">
+<button class="material-symbols-outlined hover:bg-surface-container-low rounded-full p-1">arrow_back</button>
+<span class="font-label-lg font-bold">Registration</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-extrabold text-on-surface">Register New Farm</h2>
+<p class="text-on-surface-variant mt-xs">Provide basic details and define your farm's field boundaries for high-precision satellite monitoring.</p>
+</header>
+<div class="space-y-xl">
+<!-- Step 1: Basic Details -->
+<div class="space-y-lg">
+<div class="flex items-center gap-sm">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">1</span>
+<h3 class="font-title-lg text-on-surface font-bold">Basic Details</h3>
+</div>
+<div class="grid grid-cols-1 gap-lg">
+<div class="relative">
+<label class="block text-sm font-bold text-on-surface-variant mb-xs ml-1">Farm Name</label>
+<input class="w-full px-lg py-md rounded-xl border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none" placeholder="e.g. Green Valley North" type="text"/>
+</div>
+<div class="relative">
+<label class="block text-sm font-bold text-on-surface-variant mb-xs ml-1">Crop Type</label>
+<select class="w-full px-lg py-md rounded-xl border border-outline-variant bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none appearance-none">
+<option>Corn (Maize)</option>
+<option>Soybeans</option>
+<option>Wheat</option>
+<option>Cotton</option>
+<option>Alfalfa</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-[42px] pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Step 2: Photo Upload Section -->
+<div class="space-y-lg">
+<div class="flex items-center gap-sm">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">2</span>
+<h3 class="font-title-lg text-on-surface font-bold">Farm Photos</h3>
+</div>
+<!-- Drag and Drop Zone -->
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-xl bg-surface-container-lowest flex flex-col items-center justify-center text-center hover:border-primary transition-all cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'wght' 600;">cloud_upload</span>
+</div>
+<p class="font-bold text-on-surface mb-xs">Drag and drop farm images</p>
+<p class="text-xs text-on-surface-variant">JPG or PNG. Max file size 10MB.</p>
+</div>
+<!-- Gallery Thumbnails -->
+<div class="grid grid-cols-3 gap-md">
+<div class="group relative rounded-lg overflow-hidden h-24 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A macro close-up of dark, rich organic soil with fine textures and small moisture droplets. High-detail photography, soft natural field lighting, professional agriculture equipment demo style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_-E5CwdjQuKg6gyINSrP8TI0BEdL9gYU-dvMskvSNw_gfPTI8E2XVPAIeIDo1l5it4gQEeGTqdyKkg1uzmACm9BGT95vr2s6lXDdFXVCPKMZRQeaIbfgViqaNss1CDefv3S4RgloPi9rGJ_vs7LtJTTTNW2_qIU7GSsgIDGd1d-NphNut5T_GJSsQs6Bfckfhi33pEnWj4C8vx5F8BC3B1ZzIDQADR8kFfi6pOZY9RAOBPfAOwyNI"/>
+<div class="absolute inset-0 bg-black/40 flex items-end p-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-[10px] text-white truncate font-medium">Soil close-up</span>
+</div>
+<button class="absolute top-1 right-1 bg-white/80 rounded-full p-0.5 opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-xs text-error">close</span>
+</button>
+</div>
+<div class="group relative rounded-lg overflow-hidden h-24 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A wide-angle aerial shot of a lush green corn field during golden hour. Cinematic lighting, soft shadows, vibrant green crops stretching to the horizon under a clear sky. High-resolution satellite drone perspective." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDib4350zhc4W_tknuCcRY-f-hgdUhB1VUfHuXBClm7TCBjKcZIz0zRjTSrNWxVeKx6PIBFrQQIa-AjPPhYRADVtFOnV2jMbpKqUjqJ9_iNIe5k836tUWjFzn2GFN63Ssdjc5a5mwnz2ep5RJY929RUPQdoTHtkZDZaHJ-JWrF6LOMgaJNH6dzoPEQMOfA4Q0CTyDflkv_s2fyN12q4Aux3L9jY3CfgfNwuuPeFQG5J_2Am9a0vd8fx"/>
+<div class="absolute inset-0 bg-black/40 flex items-end p-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-[10px] text-white truncate font-medium">Overview North</span>
+</div>
+<button class="absolute top-1 right-1 bg-white/80 rounded-full p-0.5 opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-xs text-error">close</span>
+</button>
+</div>
+<div class="group relative rounded-lg overflow-hidden h-24 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A modern industrial irrigation pump station in a farm field. Shiny metal surfaces, blue pipes, clean concrete base. Professional technical photography with sharp focus and bright daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGFVIJsyg0eqiktdoREKVYdNHI_mjDwmRxzHiJ65o0OS2vL3LFNfwNFzWUEh83wSo3LYOL3h5VmSEVucWCkt8UZ-bFZFVMMmrI2ytsbTiXmg0A-yESV0Sz4IpxzQlUZ2e5po0AjYtvlnG7FRzFxf_irptU1Ac7Z7NsWLnH5nrCmoMqzgFVNHC3he1bN9cgi3OigbsIcd-3Y-WM08U6CxnYaXdWLYx9Ltny7ZCbrMbhEXBiMGV6Xkai"/>
+<div class="absolute inset-0 bg-black/40 flex items-end p-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-[10px] text-white truncate font-medium">Irrigation pump</span>
+</div>
+<button class="absolute top-1 right-1 bg-white/80 rounded-full p-0.5 opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-xs text-error">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Step 3: Map Controls -->
+<div class="space-y-lg">
+<div class="flex items-center gap-sm">
+<span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs font-bold">3</span>
+<h3 class="font-title-lg text-on-surface font-bold">Boundary Mapping</h3>
+</div>
+<p class="text-sm text-on-surface-variant">Use the map on the right to manually trace your farm's perimeter or upload a boundary file.</p>
+<div class="flex flex-col sm:flex-row gap-md">
+<button class="flex-1 flex items-center justify-center gap-sm bg-primary text-on-primary py-md rounded-xl font-bold hover:brightness-110 active:scale-95 transition-all shadow-md">
+<span class="material-symbols-outlined">pentagon</span>
+                                Draw Boundary
+                            </button>
+<button class="flex-1 flex items-center justify-center gap-sm border-2 border-primary text-primary py-md rounded-xl font-bold hover:bg-surface-container-low active:scale-95 transition-all">
+<span class="material-symbols-outlined">upload_file</span>
+                                Upload GeoJSON
+                            </button>
+</div>
+</div>
+</div>
+<!-- Sticky Footer Action -->
+<div class="mt-xl pt-xl border-t border-outline-variant flex justify-end gap-md">
+<button class="px-xl py-md text-on-surface-variant font-bold hover:text-on-surface transition-colors">Cancel</button>
+<button class="px-xl py-md bg-secondary text-on-secondary rounded-xl font-bold shadow-lg hover:brightness-110 active:scale-95 transition-all">Save &amp; Continue</button>
+</div>
+</div>
+</section>
+<!-- Right Section: Interactive Satellite Map -->
+<section class="flex-1 relative h-full bg-surface-dim overflow-hidden">
+<!-- Map Background Placeholder -->
+<div class="absolute inset-0 z-0 bg-cover bg-center" data-alt="A high-resolution satellite imagery map of vast agricultural fields in the Midwest United States. Various geometric field shapes in different shades of green and brown, with some center-pivot irrigation circles visible. Crisp, clear daylight lighting, professional GIS software aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDSdv_y57iY2SFV3otTL6yrau_-qBpHcO0BREHUM_Nu_WnB0r-nJAIE54WN9PAnshKTL6QnOMsjsROY22LuKxdiIYscOn0YRtHqpFgWKw5OwZvS5bzrRX5m9X7HZ2drljDcQksXMZLEOYX26qE5Tj46yRT_S5JHtNsaTe5DcX7i0YVLCatbla47jXsJm-AEYn6_wQFp1FtOZBJMS1SHGkUtIrL5OkOt4cogw1eh8yzKHtvlDm6IHK9X')">
+</div>
+<!-- Drawing Overlay Mockup -->
+<svg class="absolute inset-0 z-10 w-full h-full pointer-events-none">
+<polygon class="fill-primary/20 stroke-primary stroke-[4] stroke-dasharray-[8,8]" points="300,200 600,250 550,500 250,450" style="stroke-dasharray: 8 4;"></polygon>
+<circle class="fill-white stroke-primary stroke-2" cx="300" cy="200" r="6"></circle>
+<circle class="fill-white stroke-primary stroke-2" cx="600" cy="250" r="6"></circle>
+<circle class="fill-white stroke-primary stroke-2" cx="550" cy="500" r="6"></circle>
+<circle class="fill-white stroke-primary stroke-2" cx="250" cy="450" r="6"></circle>
+<circle class="fill-white/80 stroke-primary/50 stroke-1" cx="450" cy="225" r="4"></circle>
+</svg>
+<!-- Map UI Overlays -->
+<div class="absolute top-lg right-lg z-20 flex flex-col gap-md">
+<!-- Map Layer Controls -->
+<div class="glass-panel p-2 rounded-2xl shadow-xl border border-white/20 flex flex-col gap-1">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary text-white shadow-md">
+<span class="material-symbols-outlined">satellite</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-variant text-on-surface transition-all">
+<span class="material-symbols-outlined">layers</span>
+</button>
+<div class="w-6 h-px bg-outline-variant mx-auto my-1"></div>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-variant text-on-surface transition-all">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-variant text-on-surface transition-all">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<!-- Drawing Toolbar -->
+<div class="glass-panel p-2 rounded-2xl shadow-xl border border-white/20 flex flex-col gap-1">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-variant text-on-surface transition-all">
+<span class="material-symbols-outlined">near_me</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-container text-white shadow-md">
+<span class="material-symbols-outlined">edit</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl hover:bg-surface-variant text-on-surface transition-all">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+</div>
+<!-- Map Attribution and Info -->
+<div class="absolute bottom-lg left-lg z-20">
+<div class="glass-panel px-md py-sm rounded-xl shadow-lg border border-white/20 text-xs font-medium text-on-surface flex items-center gap-md">
+<span class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse-soft"></span>
+                        Drawing active: 142.5 Acres
+                    </span>
+<span class="text-outline">|</span>
+<span>Coordinates: 41.8781° N, 87.6298° W</span>
+</div>
+</div>
+<!-- Search Bar on Map -->
+<div class="absolute top-lg left-lg z-20 w-80">
+<div class="glass-panel flex items-center px-md h-12 rounded-xl shadow-lg border border-white/20">
+<span class="material-symbols-outlined text-outline">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-sm font-medium" placeholder="Search location or coordinates" type="text"/>
+<span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary">my_location</span>
+</div>
+</div>
+<!-- Map Shadow Overlays -->
+<div class="absolute left-0 top-0 bottom-0 w-32 map-gradient-overlay pointer-events-none"></div>
+</section>
+</main>
+<script>
+        // Micro-interaction for drawing tool simulation
+        document.querySelectorAll('.glass-panel button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.parentElement.children.length > 3) { // It's a toolbar
+                    this.parentElement.querySelectorAll('button').forEach(b => {
+                        b.classList.remove('bg-primary-container', 'text-white', 'shadow-md', 'bg-primary');
+                        b.classList.add('hover:bg-surface-variant', 'text-on-surface');
+                    });
+                    this.classList.remove('hover:bg-surface-variant', 'text-on-surface');
+                    this.classList.add('bg-primary-container', 'text-white', 'shadow-md');
+                }
+            });
+        });
+
+        // Simple toggle for side nav on mobile
+        window.addEventListener('resize', () => {
+            // Adaptive logic could go here if needed
+        });
+    </script>
+</body></html>
